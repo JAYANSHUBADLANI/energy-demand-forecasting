@@ -1,0 +1,9 @@
+{
+  "statistic": -6.091217891953594,
+  "p_value": 1.3385264008292097e-09,
+  "n": 2016,
+  "horizon": 24,
+  "model_1": "LightGBM",
+  "model_2": "SARIMAX(daily)+temp",
+  "loss": "squared error"
+}
