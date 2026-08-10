@@ -6,4 +6,4 @@ lightgbm==4.6.0
 holidays==0.63
 matplotlib==3.9.2
 seaborn==0.13.2
-streamlit==1.40.1
+streamlit==1.61.1
