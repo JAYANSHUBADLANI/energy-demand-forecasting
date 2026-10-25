@@ -30,7 +30,7 @@ Kaggle: [Hourly energy demand generation and weather](https://www.kaggle.com/dat
 | `weather_features.csv` | weather for Valencia, Madrid, Bilbao, Barcelona, Seville (OpenWeather) | temperature (+ humidity, wind, pressure, clouds), averaged across the 5 cities |
 
 Cleaning (in `src/data_ingestion.py`): tz-aware timestamps parsed to UTC,
-duplicate rows dropped (the weather file contains thousands of duplicated
+duplicate rows dropped (the weather file contains 1,500 duplicated
 (city, hour) rows), the series re-indexed to a complete hourly range, gaps of
 ≤ 24 h time-interpolated, Kelvin → °C, whitespace-polluted city names fixed.
 Exact counts for the data you run on are written to `reports/data_quality.json`.
@@ -138,6 +138,7 @@ energy-demand-forecasting/
 # 1. environment (Python 3.10 to 3.12)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+#    on macOS LightGBM also needs OpenMP: brew install libomp
 
 # 2. data: either place the two Kaggle CSVs in data/raw/, or configure
 #    Kaggle API credentials (~/.kaggle/kaggle.json) and let step 3 download.
