@@ -82,18 +82,20 @@ def mae(a: np.ndarray, p: np.ndarray) -> float:
     return float(np.mean(np.abs(a - p)))
 
 
-def diebold_mariano(e1: np.ndarray, e2: np.ndarray, h: int = HORIZON) -> dict:
-    """DM test on squared-error loss with Newey-West variance and the
-    Harvey-Leybourne-Newbold small-sample correction.
+def dm_from_differential(d: np.ndarray, h: int = HORIZON, bartlett: bool = False) -> dict:
+    """DM test on a loss differential d = loss(model 1) - loss(model 2).
 
-    Negative statistic => model 1 has significantly lower loss.
+    The long-run variance is built from the first h - 1 autocovariances, with
+    equal weights as in the original DM test, or with Bartlett (Newey-West)
+    weights when ``bartlett`` is set. The Harvey-Leybourne-Newbold small-sample
+    correction is applied. Negative statistic => model 1 has lower loss.
     """
-    d = e1**2 - e2**2
     n = len(d)
     dbar = d.mean()
     dc = d - dbar
     gamma = [float(np.mean(dc[: n - k] * dc[k:])) for k in range(h)]
-    var_dbar = (gamma[0] + 2 * sum(gamma[1:])) / n
+    weights = [1 - k / h for k in range(1, h)] if bartlett else [1.0] * (h - 1)
+    var_dbar = (gamma[0] + 2 * sum(w * g for w, g in zip(weights, gamma[1:]))) / n
     if var_dbar <= 0:
         var_dbar = gamma[0] / n
     dm = dbar / np.sqrt(var_dbar)
@@ -101,6 +103,11 @@ def diebold_mariano(e1: np.ndarray, e2: np.ndarray, h: int = HORIZON) -> dict:
     dm_adj = float(dm * hln)
     p_value = float(2 * (1 - stats.t.cdf(abs(dm_adj), df=n - 1)))
     return {"statistic": dm_adj, "p_value": p_value, "n": n, "horizon": h}
+
+
+def diebold_mariano(e1: np.ndarray, e2: np.ndarray, h: int = HORIZON) -> dict:
+    """Headline DM test: squared-error loss, equal-weight variance, HLN correction."""
+    return dm_from_differential(e1**2 - e2**2, h)
 
 
 # ---------------------------------------------------------------- window ----

@@ -20,3 +20,4 @@ venv/
 logs/
 *.log
 .DS_Store
+.pytest_cache/

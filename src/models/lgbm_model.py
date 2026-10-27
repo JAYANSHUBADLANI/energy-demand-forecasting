@@ -5,8 +5,8 @@
   alpha = 0.10 / 0.50 / 0.90 for day-ahead prediction intervals.
 
 Because every lag/rolling feature is shifted >= 24 h (see src/features.py),
-the model produces a *direct* day-ahead forecast - no recursive feedback,
-no leakage.
+the model produces a *direct* day-ahead forecast - no recursive feedback and
+no load leakage (weather is the observed value at the target hour).
 
 Running this module trains on all data except the evaluation window, prints
 a quick holdout check, and pickles the models + feature list to ``models/``
