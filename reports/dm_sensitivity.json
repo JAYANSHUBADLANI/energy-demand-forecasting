@@ -1,0 +1,41 @@
+{
+  "note": "model 1 = LightGBM, model 2 = SARIMAX(daily)+temp; negative statistic favours LightGBM",
+  "dm_squared_equal_weights": {
+    "statistic": -1.461,
+    "p_value": 0.144
+  },
+  "dm_squared_bartlett": {
+    "statistic": -1.677,
+    "p_value": 0.0936
+  },
+  "dm_absolute_equal_weights": {
+    "statistic": -3.135,
+    "p_value": 0.00174
+  },
+  "dm_absolute_bartlett": {
+    "statistic": -3.616,
+    "p_value": 0.000306
+  },
+  "daily_mae": {
+    "days": 84,
+    "lgbm_better_days": 67,
+    "paired_t_p_value": 0.00257,
+    "wilcoxon_p_value": 0.000242
+  },
+  "daily_mae_by_day_type": {
+    "weekday_non_holiday": {
+      "days": 56,
+      "lgbm_mw": 1096,
+      "sarimax_mw": 1538
+    },
+    "weekend_or_holiday": {
+      "days": 28,
+      "lgbm_mw": 1866,
+      "sarimax_mw": 2061
+    }
+  },
+  "squared_error_share_of_worst_5_days": {
+    "lgbm": 0.426,
+    "sarimax": 0.43
+  }
+}

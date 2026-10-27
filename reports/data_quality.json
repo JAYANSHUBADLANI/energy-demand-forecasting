@@ -1,6 +1,6 @@
 {
   "energy_duplicate_timestamps_dropped": 0,
-  "weather_duplicate_rows_dropped": 1500,
+  "weather_duplicate_rows_dropped": 3076,
   "weather_cities": [
     "Barcelona",
     "Bilbao",
@@ -8,10 +8,10 @@
     "Seville",
     "Valencia"
   ],
-  "missing_hours_reindexed": 40,
-  "target_nans_interpolated": 76,
+  "missing_hours_reindexed": 0,
+  "target_nans_interpolated": 36,
   "rows_dropped_gap_too_long": 0,
-  "final_rows": 35040,
+  "final_rows": 35064,
   "start": "2014-12-31 23:00:00+00:00",
-  "end": "2018-12-30 22:00:00+00:00"
+  "end": "2018-12-31 22:00:00+00:00"
 }
